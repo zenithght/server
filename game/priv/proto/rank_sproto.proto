@@ -1,0 +1,16 @@
+%% @doc 模块号 17
+
+%% 排行榜
+proto PROTO_RANK_LIST = 1
+{
+    client
+    {
+        rank_type,      %排行榜类型 1:段位排行榜 2:等级排行榜
+        page_size       %第几页, 最大申请排名2000名。（下拉刷新到2000名以后是小概率事件，目前不考虑）
+    }
+    server
+    {
+        my_rank,        %我的排名
+        data            %[id::玩家id, Icon::头像图标, Sex::性别, Nick::昵称, DanLv::段位或者等级]
+    }
+}

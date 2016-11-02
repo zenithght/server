@@ -1,0 +1,12 @@
+{application, snakes,
+ [
+  {description, "game server"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { snakes_app, []}},
+  {env, []}
+ ]}.

@@ -1,0 +1,25 @@
+
+
+ai_init:atom
+ai_move:atom
+ai_clear:atom
+
+enum move_type{
+    move_to_center_1            = 11,
+    move_to_center_2            = 12,
+    move_to_center_3            = 13,
+    move_escape_1               = 21,
+    move_escape_2               = 22,
+    move_fight_1                = 31,
+    move_fight_2                = 32,
+    move_eat_food_1             = 41,
+    move_eat_food_2             = 42,
+    move_eat_food_3             = 43
+
+}
+
+
+enum has_player{
+    no_player                   = 1,
+    has_player                  = 2
+}

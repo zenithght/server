@@ -1,0 +1,30 @@
+
+%% 协议 module file protonum
+
+
+all_proto[
+    test,   %test client to server proto
+    debug,   %print
+    app     %app||game
+]
+{
+
+    err_code_handler  err_code_sproto      0,     %错误码,心跳
+    sys_handler       sys_sproto           1,     %系统信息
+
+    config_handler    config_sproto        10,    %策划配置信息
+    login_handler     login_sproto         11,    %登录
+    fight_handler_client fight_sproto      12,    %战斗信息
+    map_handler       map_sproto           13,    %地图信息
+    shop_handler      shop_sproto          14,    %商店系统
+    chat_handler      chat_sproto          15,    %聊天系统，跑马灯、聊天
+    attr_handler_client attr_sproto        16,    %属性（包括资产）系统
+    rank_handler      rank_sproto          17,    %排行系统
+    mail_handler      mail_sproto          18,    %邮件系统
+    sign_handler      sign_sproto          19,    %月签系统
+    item_handler      item_sproto          20,    %道具系统。目前只存在：精英赛参赛券
+    room_handler      room_sproto          21,    %邀请房功能
+    friend_handler_client friend_sproto    22,    %好友系统
+    skin_handler      skin_sproto          23     %皮肤系统
+}
+

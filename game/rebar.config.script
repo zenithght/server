@@ -1,0 +1,46 @@
+
+{erl_opts, Opts} = lists:keyfind(erl_opts, 1, CONFIG),
+
+Deps = {deps, [
+           %%日志系统
+           {lager, ".*", {git, "https://github.com/basho/lager.git", {tag, "3.2.1"}}},
+
+           %%连接mysql的驱动，线程池实现
+           {emysql, ".*", {git, "https://github.com/Eonblast/Emysql.git", {tag, "0.4.1"}}},
+
+           %% erlang实现的json解析库，参考rfc4627标准
+           {rfc4627_jsonrpc, ".*", {git, "https://github.com/tonyg/erlang-rfc4627.git", {tag, "moved_to_github"}}},
+
+           %% redis连接池
+           {eredis_pool, ".*", {git, "https://github.com/hiroeorz/eredis_pool.git", master}},
+
+           %% web服务器，使用websocket
+           {cowboy, ".*", {git, "https://github.com/ninenines/cowboy.git", "2.0.0-pre.3"}},
+
+           %% nif json处理
+           {jiffy, ".*", {git, "https://github.com/davisp/jiffy.git", {tag, "0.14.8"}}}
+
+
+       %%    %% 通用函数
+       %%    {erl, ".*", {git, "https://github.com/yujian1018/erl", {tag, "master"}}},
+       %%
+       %%    %% 配置文件加载
+       %%    {config, ".*", {git, "https://github.com/yujian1018/config", {tag, "master"}}},
+       %%
+       %%    %% 自动义格式解析
+       %%    {parse_tool, ".*", {git, "https://github.com/yujian1018/parse_tool", {tag, "master"}}},
+       %%
+       %%    %% 数据缓存系统
+       %%    {db_cache, ".*", {git, "https://github.com/yujian1018/db_cache", {tag, "master"}}}
+
+       ]},
+
+{NewOpts, ConfigOS} =
+    case os:type() of
+        {unix,linux} ->
+            {[native, {d, linux}]++Opts, [Deps, {sub_dirs, ["rel", "apps/*"]}]};
+        _ ->
+            {[{d, windows}]++Opts, [{sub_dirs, ["rel", "deps/lager", "apps/*"]}]}
+    end,
+
+lists:keyreplace(erl_opts, 1, CONFIG, {erl_opts, NewOpts}) ++ ConfigOS.

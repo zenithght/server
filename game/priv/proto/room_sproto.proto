@@ -1,0 +1,138 @@
+%% @doc 模块号 21
+
+
+%% 创建房间
+proto PROTO_CREATE_ROOT = 1
+{
+    client
+    {
+    }
+    server
+    {
+        ret     % 1:表示房间创建成功，可以邀请玩家
+    }
+}
+
+
+%% 邀请玩家
+proto PROTO_INVITE_PLAYER = 2
+{
+    client
+    {
+        uid,            %被邀请人id
+        player_icon,    %被邀请人头像
+        plyaer_name     %邀请人名称
+    }
+    server
+    {
+        ret     %1:表示邀请成功，等待玩家同意
+    }
+}
+
+
+%% 被邀请玩家, 只能被邀请一次
+proto PROTO_INVITE = 3
+{
+    client
+    {
+    }
+    server
+    {
+        player_name,    %邀请人名称
+        player_icon,    %邀请人头像
+        player_dan_lv   %邀请人段位等级
+    }
+}
+
+
+%% 玩家客户端发送， 同意邀请, 强制退出地图，并且打开等待界面（显示将要进入地图的玩家）
+proto PROTO_ARGEE_INVITE = 4
+{
+    client
+    {
+    }
+    server{
+        %房主客户端接收到信息
+        invite_uid,      %玩家id
+        state,          %玩家状态
+        snakes_model,    %玩家蛇模型
+        snakes_name      %玩家蛇名称
+    }
+}
+
+%% 拒绝邀请
+proto PROTO_REFUSE_INVITE = 5
+{
+    client
+    {
+    }
+    server
+    {
+    }
+}
+
+%% 离开房间
+proto PROTO_LEAVE_ROOM = 6
+{
+    client
+    {
+    }
+    server
+    {
+        ret     %1:表示成功
+    }
+}
+
+%% 房主关闭房间
+proto PROTO_CLOSE_ROOM = 7
+{
+    client
+    {
+    }
+    server
+    {
+        ret     %1:关闭成功
+    }
+}
+
+
+
+
+
+%% 更新玩家信息，到玩家列表中
+proto PROTO_UPDATE_PLAYER = 8
+{
+    client
+    {
+
+    }
+    server{
+        player_uid,     %玩家uid
+        state           %玩家状态更新 state:1等待中 2同意邀请 3拒绝 4离开
+    }
+}
+
+%% 邀请中每邀请一个玩家，广播该玩家数据到玩家列表中
+proto PROTO_ABCAST_PLAYER = 9
+{
+    client
+    {
+
+    }
+    server{
+        player_list     %等待列表 [player_uid, player_nick, player_icon, snakes_name, state, times::邀请该玩家的时间戳] state:1等待中 2同意邀请 3拒绝 4离开
+    }
+}
+
+%% 同意邀请时，获取玩家列表
+proto PROTO_ABCAST_PLAYERS = 10
+{
+    client
+    {
+
+    }
+    server{
+        player_list     %等待列表 [[player_nick, player_icon, snakes_name, state, times::邀请该玩家的时间戳]] state:1等待中 2同意邀请 3拒绝 4离开
+    }
+}
+%% 进入游戏 调用fight系统接口

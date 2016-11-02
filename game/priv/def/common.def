@@ -1,0 +1,16 @@
+
+NULL:binary
+
+undefined:atom
+
+
+snakes:atom
+ip:atom
+port:atom
+server_id:atom
+server_name:atom
+server_version:atom
+server_web_node:atom
+
+
+reconnect:atom

@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+game/.idea/
+game/.rebar/
+game/apps/
+game/deps/
+game/ebin/
+game/log/
+game/rel/snakes
+game/priv/etc
+game/src/auto
+*.so
+*.d
+*.o
+*.iml
+*.txt
+*.dump
+
